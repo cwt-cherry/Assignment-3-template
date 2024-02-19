@@ -41,12 +41,12 @@ public:
 // Beginning of detector class
 
 // Functionalities needed, in addition to constructor/destructor/setters/getters (see slides on BB):
-// - write a function that takes a particle and returns a bool describing whether 
+// - write a function that takes a particle 
+//   and returns a bool and a print-out on whether this type of detector detected the particle
+//   depending on the detector/particle combination (see slides on BB)
 // - have data members that keep track of how many particles were detected by this particular detector, 
 //   and of which type
-//   the particle has been detected or not, 
-//   depending on the detector/particle combination (see slides on BB)
-// - write a function that prints how many particles passed through this detector
+// - write a function (accessor) that prints how many particles passed through this detector
 
 // End of detector class
 
