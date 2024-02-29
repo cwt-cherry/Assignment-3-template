@@ -13,7 +13,7 @@ using std::string;
 class particle
 {
 private:
-  string particle_name; // electron or muon
+  string name; // electron or muon
   double rest_mass; // Unit of MeV
   int charge; // -1 or +1
   double velocity; // Between 0 and c, in m/s
@@ -21,10 +21,23 @@ private:
   double beta = velocity / speed_of_light; // Between 0-1
 
 public:
-  // Constructors
-  // Here you need a default constructor, and a parameterised constructor
+  // Destruct Constructor
+  particle(): name{}, rest_mass{}, charge{}, velocity{}, beta{}
+  {
+  }
+
+  // Parameterised Constructor
+  particle(string particle_name, double particle_rest_mass, int particle_charge, double particle_velocity, double particle_beta):
+    name{particle_name}, rest_mass{particle_rest_mass}, charge{particle_charge}, velocity{particle_velocity}
+  {
+    beta = velocity / speed_of_light;
+  }
 
   // Destructor
+  ~particle()
+  {
+    std::cout<<"Destroying "<<name<<std::endl;
+  }
 
   // Getter functions (accessors) to 
   // This should include function returning beta value 
@@ -89,7 +102,7 @@ int main()
 //     static const double speedOfLight;
 
 // public:
-//     // Constructor
+//     // Default Constructor = setters
 //     Lepton(std::string type, double mass, int charge, double velocity)
 //         : particleType(type), restMass(mass), charge(charge) {
 //         setVelocity(velocity);
