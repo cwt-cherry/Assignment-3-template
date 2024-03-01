@@ -205,117 +205,105 @@ particle detected_particle;
 //   and of which type
 
 // Detect number of electrons
-int electrons_number()
+int electrons()
 {
   int electrons_number{0};
   if(detected_particle.get_name()=="electron")
   {
     electrons_number++;
   }
+  return electrons_number;
 }
 
 // Detect number of antielectrons
-int antielectrons_number()
+int antielectrons()
 {
   int antielectrons_number{0};
   if(detected_particle.get_name()=="antielectron")
   {
     antielectrons_number++;
   }
+  return antielectrons_number;
 }
 
 // Detect number of muons
-int muons_number()
+int muons()
 {
   int muons_number{0};
   if(detected_particle.get_name()=="muon")
   {
     muons_number++;
   }
+  return muons_number;
 }
 
 // Detect number of antimuons
-int antimuons_number()
+int antimuons()
 {
   int antimuons_number{0};
   if(detected_particle.get_name()=="antimuon")
   {
     antimuons_number++;
   }
+  return antimuons_number;
 }
 
 // Tracker detects electrons, muons and their antiparticles
-int tracker_particles()
+int tracker()
 {
   std::cout<<"Enter status of tracker: ";
   bool tracker_status = get_status();
+  int tracker_particles{0};
   if(tracker_status)
   {
-    int tracker_particles{0};
-    return tracker_particles;
+    tracker_particles = electrons() + antielectrons() + muons() + antimuons();
   }
   else
   {
     return 0;
   }
+  return tracker_particles;
 }
 
 // Calorimeter detects electrions and antielectrons
-int calorimeter_particles()
+int calorimeter()
 {
   std::cout<<"Enter status of calorimeter: ";
   bool calorimeter_status = get_status();
+  int calorimeter_particles{0};
   if(calorimeter_status)
   {
-    int electrons_number{0};
-    int antielectrons_number{0};
-    if(detected_particle.get_name()=="electron")
-    {
-      electrons_number++;
-    }
-    else if(detected_particle.get_name()=="antielectron")
-    {
-      antielectrons_number++;
-    }
-    int calorimeter_particles = electrons_number + antielectrons_number;
-    return calorimeter_particles, electrons_number, antielectrons_number;
+    calorimeter_particles = electrons() + antielectrons();
   }
   else
   {
     return 0;
   }
+  return calorimeter_particles;
 }
 // Muon chamber detects muons and antimuons
-int muon_chamber_particles()
+int muon_chamber()
 {
   std::cout<<"Enter status of muon chamber: ";
   bool muon_chamber_status = get_status();
+  int muon_chamber_particles{0};
   if(muon_chamber_status)
   {
-    int muons_number{0};
-    int antimuons_number{0};
-    if(detected_particle.get_name()=="muon")
-    {
-      muons_number++;
-    }
-    else if(detected_particle.get_name()=="antimuon")
-    {
-      antimuons_number++;
-    }
-    int muon_chamber_particles = muons_number + antimuons_number;
-    return muon_chamber_particles, muons_number, antimuons_number;
+    muon_chamber_particles = muons() + antimuons();
   }
   else
   {
     return 0;
   }
+  return muon_chamber_particles;
 }
+
 // - write a function (accessor) that prints how many particles passed through this detector
 void print_detected_results()
 {
-  std::cout<<"Number of particles passed through the tracker is: "<<tracker_particles<<std::endl;
-  std::cout<<"Number of particles passed through the calorimeter is: "<<calorimeter_particles<<std::endl;
-  std::cout<<"Number of particles passed through the muon chamber is: "<<muon_chamber_particles<<std::endl;
+  std::cout<<"Number of particles passed through the tracker is: "<<tracker()<<std::endl;
+  std::cout<<"Number of particles passed through the calorimeter is: "<<calorimeter()<<std::endl;
+  std::cout<<"Number of particles passed through the muon chamber is: "<<muon_chamber()<<std::endl;
   std::cout<<detected_particle.get_name()<<" was detected."<<std::endl;
 }
 };
@@ -336,7 +324,6 @@ int main()
   // Pass the list of particles into each detector
 
   // Print a summary of how many particles were detected
-
   return 0;
 }
 
