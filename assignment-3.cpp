@@ -8,7 +8,6 @@
 #include<cmath>
 
 using std::string;
-using std::vector
 
 // Beginning of particle class
 class particle
@@ -233,7 +232,7 @@ int main()
   particle antitau("antitau", 1777, 1, 2e8);
 
   // Create a vector to store particles
-  vector<particle> particles;
+  std::vector<particle> particles;
 
   // Add particles to the vector
   particles.push_back(particle("electron", 0.511, -1, 2e8));
