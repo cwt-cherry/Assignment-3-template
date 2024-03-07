@@ -8,7 +8,7 @@ class detector
 private:
   string type;
   bool status;
-  int particles_count;
+  int particles_count{0};
 
 public:
   // Default Constructor
@@ -26,6 +26,12 @@ public:
   ~detector()
   {
     std::cout<<"Destroying "<<type<<std::endl;
+  }
+
+  // Getter
+  bool get_status()
+  {
+    return status;
   }
 
   // Setter
@@ -58,18 +64,12 @@ public:
       }
       else
       {
-          std::cin.clear();
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-          std::cout << "Invalid input. Please enter choice again." << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input. Please enter choice again." << std::endl;
       }
     }
   }
-
-//   // Getter
-//   bool get_status()
-//   {
-//     return status;
-//   }
 
   // Function to detect particles
   bool detect_particles(particle detected_particle)

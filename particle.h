@@ -13,11 +13,11 @@ class particle
 {
 private:
   string name; // electron or muon
-  double rest_mass; // Unit of MeV
-  int charge; // -1 or +1
+  double rest_mass{0}; // Unit of MeV
+  int charge{1}; // -1 or +1
   const double speed_of_light = 2.9979245e8; // Unit of m/s
-  double velocity; // Between 0 and c, in m/s
-  double beta; // Between 0-1
+  double velocity{0}; // Between 0 and c, in m/s
+  double beta{0}; // Between 0-1
 
 public:
   // Default Constructor
@@ -27,10 +27,8 @@ public:
 
   // Parameterised Constructor
   particle(string particle_name, double particle_rest_mass, int particle_charge, double particle_velocity):
-    name{particle_name}, rest_mass{particle_rest_mass}, charge{particle_charge}, velocity{particle_velocity}, beta{}
+    name{particle_name}, rest_mass{particle_rest_mass}, charge{particle_charge}, velocity{particle_velocity}, beta{particle_velocity}
   {
-    set_velocity(particle_velocity);
-    beta = velocity / speed_of_light;
   }
 
   // Destructor
@@ -40,42 +38,96 @@ public:
   }
 
   // Getter functions
-  string get_name() {return name;}
+  string get_name()
+  {
+    return name;
+  }
 
-//   double get_rest_mass()
-//   {
-//     return rest_mass;
-//   }
-//   int get_charge()
-//   {
-//     return charge;
-//   }
-//   double get_beta()
-//   {
-//     return beta;
-//   }
+  double get_velocity()
+  {
+    return velocity;
+  }
+
+  double get_rest_mass()
+  {
+    return rest_mass;
+  }
+
+  int get_charge()
+  {
+    return charge;
+  }
+
+  double get_beta()
+  {
+    return beta;
+  }
 
   // Setter functions
-  double set_velocity(double particle_velocity)
+  void set_name(string particle_name)
   {
-    if (speed_of_light >= particle_velocity && particle_velocity >= 0)
+    if(particle_name == "electron" || particle_name == "antielectron" || particle_name == "muon" || particle_name == "antimuon")
     {
-      return velocity = particle_velocity;
+      name = particle_name;
     }
     else
     {
-      std::cout<<"Invalid velocity. Velocity should be between 0 and the speed of light."<<std::endl;
+      std::cerr << "Invalid particle name." << std::endl;
+      exit(0);
+    }
+  }
+
+  void set_velocity(double particle_velocity)
+  {
+    if(speed_of_light >= particle_velocity && particle_velocity >= 0)
+    {
+      velocity = particle_velocity;
+    }
+    else
+    {
+      std::cerr<<"Invalid velocity. Velocity should be between 0 and the speed of light."<<std::endl;
+      exit(0);
+    }
+  }
+
+  void set_rest_mass(double particle_rest_mass)
+  {
+    rest_mass = particle_rest_mass;
+  }
+
+  void set_charge(int particle_charge)
+  {
+    if(particle_charge == 1 || particle_charge == -1)
+    {
+      charge = particle_charge;
+    }
+    else
+    {
+      std::cerr << "Invalid particle charge. Value should be either +1 or -1" << std::endl;
+      exit(0);
+    }
+  }
+
+  void set_beta(double particle_velocity)
+  {
+    if(speed_of_light >= particle_velocity && particle_velocity >= 0)
+    {
+      beta = particle_velocity/speed_of_light;
+    }
+    else
+    {
+      std::cerr<<"Invalid beta value. Value should be between 0 and 1."<<std::endl;
       exit(0);
     }
   }
   // Function to print info about a particle
   void print_data()
   {
-    std::cout<<"particle type: "<<name<<std::endl;
-    std::cout<<"rest mass: "<<rest_mass<<std::endl;
-    std::cout<<"charge: "<<charge<<std::endl;
-    std::cout<<"velocity: "<<velocity<<std::endl;
-    std::cout<<"beta value: "<<beta<<std::endl;
+    std::cout<<"particle type: "<<get_name()<<std::endl;
+    std::cout<<"rest mass: "<<get_rest_mass()<<" MeV"<<std::endl;
+    std::cout<<"charge: "<<get_charge()<<std::endl;
+    std::cout<<"velocity: "<<get_velocity()<<" m/s"<<std::endl;
+    std::cout<<"beta value: "<<get_beta()<<std::endl;
     std::cout<<"---------------------------------"<<std::endl;
   }
 

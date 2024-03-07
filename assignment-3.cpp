@@ -6,6 +6,8 @@
 #include<string>
 #include<vector>
 #include<cmath>
+#include<cstdlib>
+#include<ctime>
 
 #include "particle.h"
 #include "detector.h"
@@ -15,37 +17,57 @@ using std::string;
 // Main program
 int main()
 {
-  // Create the following particles: 
-  // two electrons, four muons, three taus, one antielectron, one antimuon, one antitau use the parameterised constructor
-  particle electron1("electron", 0.511, -1, 2e8);
-  particle electron2("electron", 0.511, -1, 2.5e8);
-  particle muon1("muon", 105.7, -1, 2.3e8);
-  particle muon2("muon", 105.7, -1, 2e8);
-  particle muon3("muon", 105.7, -1, 2e8);
-  particle muon4("muon", 105.7, -1, 2e8);
-  particle tau1("tau", 1777, -1, 2e8);
-  particle tau2("tau", 1777, -1, 2e8);
-  particle tau3("tau", 1777, -1, 2e8);
-  particle antielectron("antielectron", 0.511, 1, 2e8);
-  particle antimuon("antimuon", 105.7, 1, 2e8);
-  particle antitau("antitau", 1777, 1, 2e8);
-
   // Create a vector to store particles
   std::vector<particle> particles;
 
-  // Add particles to the vector
-  particles.emplace_back(electron1);
-  particles.emplace_back(electron2);
-  particles.emplace_back(muon1);
-  particles.emplace_back(muon2);
-  particles.emplace_back(muon3);
-  particles.emplace_back(muon4);
-  particles.emplace_back(tau1);
-  particles.emplace_back(tau2);
-  particles.emplace_back(tau3);
-  particles.emplace_back(antielectron);
-  particles.emplace_back(antimuon);
-  particles.emplace_back(antitau);
+  // Create the following particles: 
+  // two electrons, four muons, three taus, one antielectron, one antimuon, one antitau use parameterised constructor
+  
+  // Add electrons
+  for(int electrons_number = 0; electrons_number < 2; ++electrons_number)
+  {
+    double randomVelocity = static_cast<double>(std::rand()) / RAND_MAX * 3e8;
+    particle electron;
+    electron.set_name("electron");
+    electron.set_rest_mass(0.511);
+    electron.set_charge(1);
+    electron.set_velocity(randomVelocity);
+    electron.set_beta(randomVelocity);
+    particles.push_back(electron);
+  }
+
+  // Add muons
+  for(int muons_number = 0; muons_number < 4; ++muons_number)
+  {
+    double randomVelocity = static_cast<double>(std::rand()) / RAND_MAX * 3e8;
+    particle muon;
+    muon.set_name("muon");
+    muon.set_rest_mass(105.7);
+    muon.set_charge(1);
+    muon.set_velocity(randomVelocity);
+    muon.set_beta(randomVelocity);
+    particles.push_back(muon);
+  }
+
+  // Add antielectron
+  double randomVelocity = static_cast<double>(std::rand()) / RAND_MAX * 3e8;
+  particle antielectron;
+  antielectron.set_name("antielectron");
+  antielectron.set_rest_mass(0.511);
+  antielectron.set_charge(-1);
+  antielectron.set_velocity(randomVelocity);
+  antielectron.set_beta(randomVelocity);
+  particles.push_back(antielectron);
+
+  // Add antimuon
+  randomVelocity = static_cast<double>(std::rand()) / RAND_MAX * 3e8;
+  particle antimuon;
+  antimuon.set_name("antimuon");
+  antimuon.set_rest_mass(105.7);
+  antimuon.set_charge(-1);
+  antimuon.set_velocity(randomVelocity);
+  antimuon.set_beta(randomVelocity);
+  particles.push_back(antimuon);
 
   // Print out the data from all the particles (put them in a vector)
   for(particle &each_particle: particles)
