@@ -103,11 +103,8 @@ public:
     }
   }
 
-// Accessor that prints how many particles passed through this detector
-  void print_detected_results()
-  {
-    std::cout<<"Number of particles passed through "<<type<<": "<<particles_count<<std::endl;
-  }
+  void print_detected_results() const;
+
 };
 // End of detector class
 

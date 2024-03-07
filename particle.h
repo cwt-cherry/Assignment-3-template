@@ -39,32 +39,32 @@ public:
   }
 
   // Getter functions
-  string get_name()
+  string get_name() const
   {
     return name;
   }
 
-  double get_velocity()
+  double get_velocity() const
   {
     return velocity;
   }
 
-  double get_rest_mass()
+  double get_rest_mass() const
   {
     return rest_mass;
   }
 
-  int get_charge()
+  int get_charge() const
   {
     return charge;
   }
 
-  double get_beta()
+  double get_beta() const
   {
     return beta;
   }
 
-  bool get_antiparticle()
+  bool get_antiparticle() const
   {
     return antiparticle;
   }
@@ -131,16 +131,8 @@ public:
   {
     antiparticle = particle_antiparticle;
   }
-  // Function to print info about a particle
-  void print_data()
-  {
-    std::cout<<"particle type: "<<get_name()<<std::endl;
-    std::cout<<"rest mass: "<<get_rest_mass()<<" MeV"<<std::endl;
-    std::cout<<"charge: "<<get_charge()<<std::endl;
-    std::cout<<"velocity: "<<get_velocity()<<" m/s"<<std::endl;
-    std::cout<<"beta value: "<<get_beta()<<std::endl;
-    std::cout<<"---------------------------------"<<std::endl;
-  }
+
+  void print_data() const;
 
 };
 // End of particle class and associated member functions
