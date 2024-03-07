@@ -20,7 +20,7 @@ private:
   double beta; // Between 0-1
 
 public:
-  // Destruct Constructor
+  // Default Constructor
   particle(): name{}, rest_mass{}, charge{}, velocity{}, beta{}
   {
   }
@@ -36,7 +36,7 @@ public:
   // Destructor
   ~particle()
   {
-    // std::cout<<"Destroying "<<name<<std::endl;
+    std::cout<<"Destroying "<<name<<std::endl;
   }
 
   // Getter functions

@@ -11,7 +11,7 @@ private:
   int particles_count;
 
 public:
-  // Destruct Constructor
+  // Default Constructor
   detector(): type{}, status{}
   {
   }
@@ -25,7 +25,7 @@ public:
   // Destructor
   ~detector()
   {
-    // std::cout<<"Destroying "<<type<<std::endl;
+    std::cout<<"Destroying "<<type<<std::endl;
   }
 
   // Setter
@@ -44,7 +44,7 @@ public:
     string chosen_status;
     while(true)
     {
-      std::cout<<"Enter status of "<<type<<":"<<std::endl;
+      std::cout<<"Enter status of "<<type<<": (on/ off)"<<std::endl;
       std::cin >> chosen_status;
       if (chosen_status == "on")
       {
