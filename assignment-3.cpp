@@ -14,60 +14,40 @@
 
 using std::string;
 
+const double speed_of_light = 2.9979245e8; // Unit of m/s
+
+// Random velocity generating function
+double random_velocity() 
+{
+  return static_cast<double>(std::rand()) / RAND_MAX * speed_of_light;
+}
+
 // Main program
 int main()
 {
+  // Create the following particles: 
+  // two electrons, four muons, three taus, one positron, one antimuon, one antitau use parameterised constructor
+  particle electron1("electron", 0.511, -1, random_velocity(), false);
+  particle electron2("electron", 0.511, -1, random_velocity(), false);
+  particle electron3("positron", 0.511, 1, random_velocity(), true);
+  particle muon1("muon", 105.7, -1, random_velocity(), false);
+  particle muon2("muon", 105.7, -1, random_velocity(), false);
+  particle muon3("muon", 105.7, -1, random_velocity(), false);
+  particle muon4("muon", 105.7, -1, random_velocity(), false);
+  particle muon5("antimuon", 105.7, 1, random_velocity(), true);
+
   // Create a vector to store particles
   std::vector<particle> particles;
 
-  // Create the following particles: 
-  // two electrons, four muons, three taus, one antielectron, one antimuon, one antitau use parameterised constructor
-  
-  // Add electrons
-  for(int electrons_number = 0; electrons_number < 2; ++electrons_number)
-  {
-    double randomVelocity = static_cast<double>(std::rand()) / RAND_MAX * 3e8;
-    particle electron;
-    electron.set_name("electron");
-    electron.set_rest_mass(0.511);
-    electron.set_charge(1);
-    electron.set_velocity(randomVelocity);
-    electron.set_beta(randomVelocity);
-    particles.push_back(electron);
-  }
-
-  // Add muons
-  for(int muons_number = 0; muons_number < 4; ++muons_number)
-  {
-    double randomVelocity = static_cast<double>(std::rand()) / RAND_MAX * 3e8;
-    particle muon;
-    muon.set_name("muon");
-    muon.set_rest_mass(105.7);
-    muon.set_charge(1);
-    muon.set_velocity(randomVelocity);
-    muon.set_beta(randomVelocity);
-    particles.push_back(muon);
-  }
-
-  // Add antielectron
-  double randomVelocity = static_cast<double>(std::rand()) / RAND_MAX * 3e8;
-  particle antielectron;
-  antielectron.set_name("antielectron");
-  antielectron.set_rest_mass(0.511);
-  antielectron.set_charge(-1);
-  antielectron.set_velocity(randomVelocity);
-  antielectron.set_beta(randomVelocity);
-  particles.push_back(antielectron);
-
-  // Add antimuon
-  randomVelocity = static_cast<double>(std::rand()) / RAND_MAX * 3e8;
-  particle antimuon;
-  antimuon.set_name("antimuon");
-  antimuon.set_rest_mass(105.7);
-  antimuon.set_charge(-1);
-  antimuon.set_velocity(randomVelocity);
-  antimuon.set_beta(randomVelocity);
-  particles.push_back(antimuon);
+  // Add particles to the vector
+  particles.push_back(electron1);
+  particles.push_back(electron2);
+  particles.push_back(electron3);
+  particles.push_back(muon1);
+  particles.push_back(muon2);
+  particles.push_back(muon3);
+  particles.push_back(muon4);
+  particles.push_back(muon5);
 
   // Print out the data from all the particles (put them in a vector)
   for(particle &each_particle: particles)

@@ -76,13 +76,13 @@ public:
   {
     if(status)
     {
-      if(type=="tracker"&&(detected_particle.get_name()=="electron"||detected_particle.get_name()=="antielectron"||detected_particle.get_name()=="muon"||detected_particle.get_name()=="antimuon"))
+      if(type=="tracker"&&(detected_particle.get_name()=="electron"||detected_particle.get_name()=="positron"||detected_particle.get_name()=="muon"||detected_particle.get_name()=="antimuon"))
       {
         std::cout<<detected_particle.get_name()<<" was detected in the tracker."<<std::endl;
         particles_count++;
         return true;
       }
-      else if(type=="calorimeter"&&(detected_particle.get_name()=="electron"||detected_particle.get_name()=="antielectron"))
+      else if(type=="calorimeter"&&(detected_particle.get_name()=="electron"||detected_particle.get_name()=="positron"))
       {
         std::cout<<detected_particle.get_name()<<" was detected in the calorimeter."<<std::endl;
         particles_count++;

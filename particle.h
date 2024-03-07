@@ -18,16 +18,17 @@ private:
   const double speed_of_light = 2.9979245e8; // Unit of m/s
   double velocity{0}; // Between 0 and c, in m/s
   double beta{0}; // Between 0-1
+  bool antiparticle;
 
 public:
   // Default Constructor
-  particle(): name{}, rest_mass{}, charge{}, velocity{}, beta{}
+  particle(): name{}, rest_mass{}, charge{}, velocity{}, beta{}, antiparticle{}
   {
   }
 
   // Parameterised Constructor
-  particle(string particle_name, double particle_rest_mass, int particle_charge, double particle_velocity):
-    name{particle_name}, rest_mass{particle_rest_mass}, charge{particle_charge}, velocity{particle_velocity}, beta{particle_velocity}
+  particle(string particle_name, double particle_rest_mass, int particle_charge, double particle_velocity, bool particle_antiparticle):
+    name{particle_name}, rest_mass{particle_rest_mass}, charge{particle_charge}, velocity{particle_velocity}, beta{particle_velocity/speed_of_light}, antiparticle(particle_antiparticle)
   {
   }
 
@@ -63,10 +64,15 @@ public:
     return beta;
   }
 
+  bool get_antiparticle()
+  {
+    return antiparticle;
+  }
+
   // Setter functions
   void set_name(string particle_name)
   {
-    if(particle_name == "electron" || particle_name == "antielectron" || particle_name == "muon" || particle_name == "antimuon")
+    if(particle_name == "electron" || particle_name == "positron" || particle_name == "muon" || particle_name == "antimuon")
     {
       name = particle_name;
     }
@@ -119,6 +125,11 @@ public:
       std::cerr<<"Invalid beta value. Value should be between 0 and 1."<<std::endl;
       exit(0);
     }
+  }
+
+  void set_antiparticle(bool particle_antiparticle)
+  {
+    antiparticle = particle_antiparticle;
   }
   // Function to print info about a particle
   void print_data()
