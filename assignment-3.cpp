@@ -34,18 +34,18 @@ int main()
   std::vector<particle> particles;
 
   // Add particles to the vector
-  particles.push_back(electron1);
-  particles.push_back(electron2);
-  particles.push_back(muon1);
-  particles.push_back(muon2);
-  particles.push_back(muon3);
-  particles.push_back(muon4);
-  particles.push_back(tau1);
-  particles.push_back(tau2);
-  particles.push_back(tau3);
-  particles.push_back(antielectron);
-  particles.push_back(antimuon);
-  particles.push_back(antitau);
+  particles.emplace_back(electron1);
+  particles.emplace_back(electron2);
+  particles.emplace_back(muon1);
+  particles.emplace_back(muon2);
+  particles.emplace_back(muon3);
+  particles.emplace_back(muon4);
+  particles.emplace_back(tau1);
+  particles.emplace_back(tau2);
+  particles.emplace_back(tau3);
+  particles.emplace_back(antielectron);
+  particles.emplace_back(antimuon);
+  particles.emplace_back(antitau);
 
   // Print out the data from all the particles (put them in a vector)
   for(particle &each_particle: particles)
