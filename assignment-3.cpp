@@ -14,6 +14,7 @@
 
 using std::string;
 
+// Define variable
 const double speed_of_light = 2.9979245e8; // Unit of m/s
 
 // Random velocity generating function
