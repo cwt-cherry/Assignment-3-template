@@ -65,8 +65,11 @@ int main()
   for(particle &each_particle: particles)
   {
     tracker.detect_particles(each_particle);
+    tracker.detect_particle_type(each_particle);
     calorimeter.detect_particles(each_particle);
+    calorimeter.detect_particle_type(each_particle);
     muon_chamber.detect_particles(each_particle);
+    muon_chamber.detect_particle_type(each_particle);
   }
 
   // Print a summary of how many particles were detected

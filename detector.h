@@ -9,6 +9,10 @@ private:
   string type;
   bool status;
   int particles_count{0};
+  int electrons_count{0};
+  int positrons_count{0};
+  int muons_count{0};
+  int antimuons_count{0};
 
 public:
   // Default Constructor
@@ -71,6 +75,35 @@ public:
     }
   }
 
+  // Function to detect particle types
+  bool detect_particle_type(particle detected_particle)
+  {
+    if(detected_particle.get_name()=="electron")
+    {
+      electrons_count++;
+      return true;
+    }
+    else if(detected_particle.get_name()=="positron")
+    {
+      positrons_count++;
+      return true;
+    }
+    else if(detected_particle.get_name()=="muon")
+    {
+      muons_count++;
+      return true;
+    }
+    else if(detected_particle.get_name()=="antimuon")
+    {
+      antimuons_count++;
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
   // Function to detect particles
   bool detect_particles(particle detected_particle)
   {
@@ -82,16 +115,31 @@ public:
         particles_count++;
         return true;
       }
+      else if(type=="tracker"&&(detected_particle.get_name()!="electron"&&detected_particle.get_name()!="positron"&&detected_particle.get_name()!="muon"&&detected_particle.get_name()!="antimuon"))
+      {
+        std::cout<<"No particles were detected in the tracker."<<std::endl;
+        return true;
+      }
       else if(type=="calorimeter"&&(detected_particle.get_name()=="electron"||detected_particle.get_name()=="positron"))
       {
         std::cout<<detected_particle.get_name()<<" was detected in the calorimeter."<<std::endl;
         particles_count++;
         return true;
       }
+      else if(type=="calorimeter"&&(detected_particle.get_name()!="electron"&&detected_particle.get_name()!="positron"))
+      {
+        std::cout<<"No particles were detected in the calorimeter."<<std::endl;
+        return true;
+      }
       else if(type=="muon_chamber"&&(detected_particle.get_name()=="muon"||detected_particle.get_name()=="antimuon"))
       {
         std::cout<<detected_particle.get_name()<<" was detected in the muon chamber."<<std::endl;
         particles_count++;
+        return true;
+      }
+      else if(type=="muon_chamber"&&(detected_particle.get_name()!="muon"&&detected_particle.get_name()!="antimuon"))
+      {
+        std::cout<<"No particles were detected in the muon chamber."<<std::endl;
         return true;
       }
       return false;
